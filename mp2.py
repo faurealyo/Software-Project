@@ -54,7 +54,7 @@ def getcust():
 				customer_list = fn.read().strip().split()
 		except FileNotFoundError:
 			print('File ('+filename+') not found! Try again!')
-	return customer_list    #sorted(customer_list)
+	return customer_list
 
 def createcust(customer_list,customer_objs = {}):
 	for i in range(len(customer_list)):
@@ -107,9 +107,7 @@ cashiers_ = cashiercreate(noOfCashiers)
 customersDone = 0
 totalTime = 0
 noOfCustomers = len(customer_list)
-
-
-				
+	
 print([str(i) for i in customer_objs.keys()],'\nEnter 111 to start simulation',end='	')
 '''
 while 1:
@@ -126,7 +124,6 @@ print('\n--------------------------------------------------Simulation Start-----
 for simulTime in range(simulTimeLength):
 	print('                Time:',simulTime)
 	cashierstatus(cashiers_)
-	#loops below are swappable
 	for customerKey in customer_objs.keys():
 		currentCustomer = customer_objs[customerKey]
 		if simulTime == 0: break
