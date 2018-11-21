@@ -13,7 +13,6 @@ class Customer:
         self.arrivalTime = int(arrivalTime)
         self.serviceTimeLength = int(stuff*self.cashierSpeed)       #service time length is based on number of items and cashierSpeed
         self.name = name
-        self.limiter = 1
     def __str__(self):
         return str(self.arrivalTime)+','+str(self.serviceTimeLength)
     def linedUp(self,queue):
@@ -22,14 +21,14 @@ class Customer:
         self.status = 0
         return queue.index(self.name)
     def service(self,simulTime,cashierNo):
-        if not self.limiter: return 0
-        self.limiter -= 1
-        self.serviceTime = int(simulTime)
-        print(self.name,'starting at time',self.serviceTime)
-        self.status = 1
-        self.departureTime =  self.serviceTime + self.serviceTimeLength
-        self.cashierOccupied = cashierNo
-        return self.status
+        if self.status == 0:
+            self.serviceTime = int(simulTime)
+            print(self.name,'starting at time',self.serviceTime)
+            self.status = 1
+            self.departureTime =  self.serviceTime + self.serviceTimeLength
+            self.cashierOccupied = cashierNo
+            return self.status
+        return 0
     def depart(self,simulTime):
         if self.status == 1:
             if simulTime == self.serviceTime + self.serviceTimeLength:
